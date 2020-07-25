@@ -3,7 +3,7 @@ from panda3d.core import CollisionNode, CollisionSphere, Vec2, Vec3
 from direct.actor.Actor import Actor
 
 from app.game.constants import Masks
-from app.objects.physicals.game_objects import GameObject
+from app.objects.game_models.base import GameObject
 
 
 class PhysicalObject(GameObject):
@@ -40,7 +40,6 @@ class PhysicalObject(GameObject):
         self.collider = self.create_collider()
         base.pusher.addCollider(self.collider, self.actor)
         base.cTrav.addCollider(self.collider, base.pusher)
-        self.collider.node().setIntoCollideMask(Masks.OTHER)
 
         self.velocity = Vec3(0, 0, 0)
 
@@ -93,11 +92,7 @@ class PhysicalObject(GameObject):
         """
         collider_name = self.__class__.__name__
         collider_node = CollisionNode(collider_name)
-        print(self.actor)
-        if self.actor.name == 'trapArmature':
-            collider_node.addSolid(CollisionSphere(0, 0, 0, 0.5))
-        else:
-            collider_node.addSolid(CollisionSphere(0, 0, 0, 500))
+        collider_node.addSolid(CollisionSphere(0, 0, 0, 0.3))
         collider = self.actor.attachNewNode(collider_node)
         collider.setPythonTag("owner", self)
         collider.show()  # So it's visible for debugging

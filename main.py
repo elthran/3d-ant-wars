@@ -59,6 +59,8 @@ class Game(ShowBase):
 
         self.world.update(time_delta=time_delta)
 
+        self.debug_text.update(world=self.world)
+
         return task.cont
 
     def cleanup(self):

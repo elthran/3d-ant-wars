@@ -2,8 +2,8 @@ from random import choice
 
 from panda3d.core import Vec3, DirectionalLight, AmbientLight, Vec4, CollisionCapsule, CollisionNode
 
-from app.objects.physicals.ant_objects import Ant
-from app.objects.physicals.food_objects import Food
+from app.objects.game_models.ant_creature import Ant
+from app.objects.game_models.food_base import Food
 
 
 class World:
@@ -44,7 +44,7 @@ class World:
         self.foods = []
 
         # Set up some monster spawn points
-        self.spawn_time = 5
+        self.spawn_time = 1
         self.spawn_timer = 1
         self.maximum_walking_enemies = 2
         self.spawn_points = []

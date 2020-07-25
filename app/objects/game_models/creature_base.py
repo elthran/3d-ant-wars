@@ -1,6 +1,6 @@
 from app.game.constants import WorldPhysics, CharacterTypes
-from app.objects.physicals.game_objects import GameObject
-from app.objects.physicals.physical_objects import PhysicalObject
+from app.objects.game_models.base import GameObject
+from app.objects.game_models.base_physical import PhysicalObject
 
 
 class CreatureObject(PhysicalObject):

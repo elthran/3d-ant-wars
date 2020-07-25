@@ -1,24 +1,28 @@
 from random import randint
 
-from panda3d.core import LPoint3f
+from panda3d.core import LPoint3f, Vec4
 
-from app.game.constants import CharacterTypes
-from app.objects.physicals.game_objects import GameObject
-from app.objects.physicals.creature_objects import CreatureObject
+from app.game.constants import CharacterTypes, Masks
+from app.objects.game_models.base import GameObject
+from app.objects.game_models.creature_base import CreatureObject
 
 
 class Ant(CreatureObject):
     def __init__(self, *args, tool_belt=None, **kwargs):
         super().__init__(*args,
-                         model_name="panda-model",
-                         model_animation={"stand": "panda-walk4",
-                                          "walk": "panda-walk4"},
+                         model_name="PandaChan/act_p3d_chan",
+                         model_animation={"stand": "PandaChan/a_p3d_chan_idle",
+                                          "walk": "PandaChan/a_p3d_chan_run"},
                          damage_taken_model="Misc/playerHit",
                          **kwargs)
 
         self.character_type = CharacterTypes.ANT
+        self.actor.setScale(0.5, 0.5, 0.5)
+        self.actor.setColor(Vec4(1, 0, 0, 1))
         self.actor.getChild(0).setH(180)
         self.destination = self.get_new_destination()
+        self.collider.node().setFromCollideMask(Masks.OTHER)
+        self.collider.node().setIntoCollideMask(Masks.OTHER)
 
     def get_new_destination(self):
         return [randint(-8, 8), randint(-8, 8), randint(-8, 8)]
@@ -27,9 +31,6 @@ class Ant(CreatureObject):
         super().update(time_delta, *args, **kwargs)
 
         self.run_logic(time_delta)
-
-        # self.actor.setScale(0.0009, 0.0009, 0.0009)
-        self.actor.setScale(0.001, 0.001, 0.001)
 
         # This can be improved. If the character is walking go through the two possibilites (was standing/ was walking)
         # Else set them to loop stand.
