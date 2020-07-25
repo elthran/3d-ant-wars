@@ -1,0 +1,10 @@
+venv/
+.idea/
+.venv/
+__pycache__
+*.sublime-*
+build/
+.python-version
+.testmondata
+dist/
+*.egg-info/
