@@ -9,7 +9,7 @@ setup(
     url="https://github.com/elthran/3d-game",
     install_requires=[
         "panda3d==1.10.5",
-        "pip==19.3.1",
+        "pip==21.1",
     ],
     classifiers=["Programming Language :: Python :: 3.6"],
     python_requires='>=3.6',
